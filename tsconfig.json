@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "noEmit": true,
+    "types": ["node"],
+    "paths": {
+      "@/*": ["./tests/*"],
+      "@dtos/*": ["./tests/dtos/*"],
+      "@factories/*": ["./tests/factories/*"],
+      "@fixtures/*": ["./tests/fixtures/*"],
+      "@mappers/*": ["./tests/mappers/*"],
+      "@models/*": ["./tests/models/*"],
+      "@pages/*": ["./tests/pages/*"],
+      "@utils/*": ["./tests/utils/*"]
+    }
+  },
+  "include": ["src", "tests", "playwright.config.ts"]
+}
