@@ -170,7 +170,7 @@ export class RegisterPage extends BasePage {
     await this.selectCountry(addressData.country);
     await this.typePostalCode(addressData.postalCode);
     await this.typeHouseNumber(addressData.houseNumber);
-    await super.waitForVisible(this._postalCodeLookupLoading);
+    await super.waitForVisible(this._postalCodeLookupLoading, true);
     await super.waitForHidden(this._postalCodeLookupLoading);
     await super.clearAll(this._streetInput, this._cityInput, this._stateInput);
     await this.typeStreet(addressData.street);

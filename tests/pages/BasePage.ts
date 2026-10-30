@@ -64,8 +64,12 @@ export abstract class BasePage {
     await locator.fill(value);
   }
 
-  protected async type(locator: Locator, value: string): Promise<void> {
-    await locator.pressSequentially(value);
+  protected async type(
+    locator: Locator,
+    value: string,
+    delay: number = 75
+  ): Promise<void> {
+    await locator.pressSequentially(value, { delay: delay });
   }
 
   protected async selectOption(locator: Locator, value: string): Promise<void> {
@@ -103,8 +107,23 @@ export abstract class BasePage {
     }
   }
 
-  protected async waitForVisible(locator: Locator): Promise<void> {
-    await locator.waitFor({ state: "visible" });
+  protected async waitForVisible(
+    locator: Locator,
+    ignore: boolean = false
+  ): Promise<void> {
+    try {
+      await locator.waitFor({ state: "visible", timeout: 2_500 });
+      await locator.scrollIntoViewIfNeeded();
+    } catch (e) {
+      if (ignore) {
+        console.warn(
+          `An exception occurred while waiting for locator '${locator}'`,
+          e
+        );
+        return;
+      }
+      throw e;
+    }
   }
 
   protected async waitForHidden(locator: Locator): Promise<void> {
