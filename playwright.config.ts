@@ -25,16 +25,32 @@ export default defineConfig({
   ],
 
   use: {
+    ...devices["Desktop Chrome"],
+
+    baseURL: process.env.BASE_URL,
     headless: true,
+
+    locale: "en-US",
+    timezoneId: "UTC",
+    colorScheme: "light",
+    deviceScaleFactor: 1,
+    viewport: { width: 1366, height: 768 },
+
     trace: "on-first-retry",
     video: "retain-on-failure",
     screenshot: "only-on-failure",
-    testIdAttribute: "data-test",
-    baseURL: process.env.BASE_URL ?? ""
+
+    testIdAttribute: "data-test"
   },
 
   projects: [
-    { name: "chromium", use: { ...devices["Desktop Chrome"] } }
+    {
+      name: "chromium",
+      use: {
+        ...devices["Desktop Chrome"],
+        viewport: { width: 1366, height: 768 }
+      }
+    }
     // { name: 'firefox', use: { ...devices['Desktop Firefox'] } },
     // { name: 'webkit', use: { ...devices['Desktop Safari'] } },
   ]
